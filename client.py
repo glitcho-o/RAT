@@ -154,7 +154,7 @@ def connect():
     while True:
         try:
             s = socket.socket()
-            s.connect(("20.205.17.23", 1235))   # ← YOUR AZURE IP
+            s.connect(("20.205.17.23", 443))   # ← YOUR AZURE IP
             choice = s.recv(1024).decode()
             return s, choice
         except:
